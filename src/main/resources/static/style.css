@@ -441,6 +441,26 @@ button:disabled {
     transition: all 0.3s ease;
 }
 
+/* Labeled form fields */
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-field label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dark-blue);
+    letter-spacing: .5px;
+}
+
+.help-text {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: -2px;
+}
+
 .form-row input:focus {
     border-color: var(--primary-blue);
     box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);

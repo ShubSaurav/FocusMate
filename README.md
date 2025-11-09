@@ -61,6 +61,16 @@ Open: http://localhost:8081
 Add tasks → Click a scheduled task to activate → Click active task (or Start) to begin timer.
 
 ---
+## ➕ Add Task: Field Meanings
+
+- Task Title: A short, clear action (e.g., “Revise Chapter 3”).
+- Priority (1–5): 1 = Low urgency, 5 = Highest urgency (used for scheduling order).
+- Deadline Date: When you plan to finish the task. Optional.
+- Target Focus Minutes: Your estimated focused work time for this task (e.g., 45, 60).
+
+Tip: After you add a task, click it in “Scheduled Tasks” to move it to “Active Task”. Clicking the active card (or Start) begins the timer.
+
+---
 ## 🗄️ Enabling MySQL Persistence (Optional)
 
 1. Start MySQL and create database:
