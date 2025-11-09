@@ -15,10 +15,29 @@ let pausedTime = 0;
 document.addEventListener('DOMContentLoaded', () => {
     updateClock();
     setInterval(updateClock, 1000);
+    initPriorityButtons();
     refreshTasks();
     loadAnalytics();
     setDailyTip();
 });
+
+// Priority buttons init
+function setPriorityActive(val) {
+    const hidden = document.getElementById('taskPriority');
+    const buttons = document.querySelectorAll('.priority-btn');
+    buttons.forEach(btn => btn.classList.toggle('active', btn.dataset.value === String(val)));
+    if (hidden) hidden.value = val;
+}
+
+function initPriorityButtons() {
+    const buttons = document.querySelectorAll('.priority-btn');
+    if (!buttons || buttons.length === 0) return;
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => setPriorityActive(btn.dataset.value));
+    });
+    const initial = document.getElementById('taskPriority')?.value || 3;
+    setPriorityActive(initial);
+}
 
 // Clock Update
 function updateClock() {
@@ -218,6 +237,7 @@ async function addTask(event) {
             document.getElementById('taskForm').reset();
             document.getElementById('taskPriority').value = 3;
             document.getElementById('taskTarget').value = 60;
+            setPriorityActive(3);
             
             showNotification('✅ Task Added', `"${title}" added to scheduled tasks!`);
             await refreshTasks();
@@ -292,9 +312,10 @@ async function endTask() {
 
 async function refreshTasks() {
     try {
-        // Load scheduled tasks
         const scheduledRes = await fetch(`${API_BASE}/tasks/scheduled`);
-        const scheduledTasks = await scheduledRes.json();
+        let scheduledTasks = await scheduledRes.json();
+        // Sort by priority descending (5 -> 1)
+        scheduledTasks = (scheduledTasks || []).sort((a, b) => (parseInt(b.priority||0) - parseInt(a.priority||0)));
         renderTasks(scheduledTasks, 'scheduledTasks', false);
         
         // Load completed tasks
