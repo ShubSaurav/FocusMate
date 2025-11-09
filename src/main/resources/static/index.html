@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 FocusMate - Pomodoro Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <h1 class="logo-text">FocusMate</h1>
+                <p>Smart Pomodoro & Task Manager</p>
+            </div>
+            <div class="time-display" id="currentTime"></div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Column - Timer -->
+            <div class="left-column">
+                <!-- Pomodoro Timer -->
+                <div class="pomodoro-section card">
+                    <h2>⏱️ Pomodoro Timer</h2>
+                    
+                    <div class="timer-display">
+                        <div class="timer-circle">
+                            <div class="timer-text" id="timerDisplay">25:00</div>
+                            <div class="timer-label">Focus Time</div>
+                        </div>
+                    </div>
+
+                    <div class="timer-controls">
+                        <div class="preset-buttons">
+                            <button class="preset-btn" onclick="setTimer(25)">25 min</button>
+                            <button class="preset-btn" onclick="setTimer(50)">50 min</button>
+                            <button class="preset-btn" onclick="setTimer(15)">15 min</button>
+                        </div>
+
+                        <div class="custom-timer">
+                            <input type="number" id="customMinutes" placeholder="Custom minutes" min="1" max="120" value="25">
+                            <button onclick="setCustomTimer()" class="btn-secondary">Set</button>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button id="startBtn" class="btn-primary" onclick="startTimer()">▶️ Start</button>
+                            <button id="pauseBtn" class="btn-warning" onclick="pauseTimer()" disabled>⏸️ Pause</button>
+                            <button id="stopBtn" class="btn-danger" onclick="stopTimer(true)" disabled>⏹️ Stop</button>
+                            <button id="doneBtn" class="btn-success" onclick="endTask()" disabled>✅ End Task</button>
+                        </div>
+                    </div>
+
+                    <div class="session-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Today's Sessions</span>
+                            <span class="stat-value" id="todaySessions">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Total Time</span>
+                            <span class="stat-value" id="totalTime">0h 0m</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle Column - Task Management -->
+            <div class="middle-column">
+                <!-- Add Task Form -->
+                <div class="add-task-section card">
+                    <h2>➕ Add New Task</h2>
+                    <form id="taskForm" onsubmit="addTask(event)">
+                        <div class="form-row">
+                            <input type="text" id="taskTitle" placeholder="📝 Task title..." required>
+                            <input type="number" id="taskPriority" placeholder="⭐ Priority (1-5)" min="1" max="5" value="3">
+                        </div>
+                        <div class="form-row">
+                            <input type="date" id="taskDueDate" class="date-input" placeholder="📅 Deadline">
+                            <input type="number" id="taskTarget" placeholder="🎯 Target minutes" min="15" value="60">
+                        </div>
+                        <button type="submit" class="btn-primary">➕ Add Task</button>
+                    </form>
+                </div>
+
+                <!-- Task Grid: Scheduled + Active -->
+                <div class="task-grid">
+                    <!-- Scheduled Tasks -->
+                    <div class="tasks-section card scheduled-tasks-compact">
+                        <div class="section-header">
+                            <h2>📋 Scheduled Tasks</h2>
+                            <button onclick="refreshTasks()" class="btn-icon">🔄</button>
+                        </div>
+                        <div id="scheduledTasks" class="task-list-compact"></div>
+                    </div>
+
+                    <!-- Active Task Section -->
+                    <div class="active-task-section card">
+                        <h2>🎯 Active Task</h2>
+                        <div id="activeTaskContainer" class="active-task-container">
+                            <p class="empty-state">Click a scheduled task to start working on it</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Completed Tasks -->
+                <div class="tasks-section card">
+                    <div class="section-header">
+                        <h2>✅ Completed Tasks</h2>
+                        <span id="completedCount" class="badge">0</span>
+                    </div>
+                    <div id="completedTasks" class="task-list"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics Section - Bottom -->
+        <div class="analytics-bottom">
+            <div class="analytics-section card">
+                <h2>📊 Analytics</h2>
+                
+                <div class="analytics-summary">
+                    <div class="summary-card">
+                        <div class="summary-icon">🎯</div>
+                        <div class="summary-content">
+                            <span class="summary-label">Completion Rate</span>
+                            <span class="summary-value" id="completionRate">0%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="summary-icon">⏰</div>
+                        <div class="summary-content">
+                            <span class="summary-label">Avg. Session</span>
+                            <span class="summary-value" id="avgSession">0 min</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="summary-icon">🔥</div>
+                        <div class="summary-content">
+                            <span class="summary-label">Streak</span>
+                            <span class="summary-value" id="streak">0 days</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-section">
+                    <h3>Task Progress</h3>
+                    <select id="analyticsTaskSelect" onchange="updateAnalytics()">
+                        <option value="">Select task for details...</option>
+                    </select>
+                    <canvas id="progressChart"></canvas>
+                    <div id="progressBars" class="progress-bars"></div>
+                </div>
+
+                <div class="productivity-tips">
+                    <h3>💡 Today's Tip</h3>
+                    <p id="dailyTip">Take a 5-minute break every 25 minutes to stay focused and refreshed!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
