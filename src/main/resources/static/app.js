@@ -249,7 +249,7 @@ async function addTask(event) {
 }
 
 // Activate a task (move from scheduled to active)
-function activateTask(task) {
+async function activateTask(task) {
     activeTask = task;
     selectedTaskId = task.id;
     
@@ -270,6 +270,18 @@ function activateTask(task) {
     // Set timer to task's target minutes
     document.getElementById('customMinutes').value = task.targetMinutes;
     setTimer(task.targetMinutes);
+    
+    // Mark as IN_PROGRESS to remove from scheduled list
+    try {
+        await fetch(`${API_BASE}/tasks/${task.id}/status`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: 'IN_PROGRESS' })
+        });
+        await refreshTasks(); // Refresh to remove from scheduled
+    } catch (error) {
+        console.error('Error updating task status:', error);
+    }
     
     showNotification('🎯 Task Activated', `Click the active task to start timer!`);
 }
@@ -344,7 +356,9 @@ function renderTasks(tasks, containerId, isCompleted) {
     
     tasks.forEach(task => {
         const taskEl = document.createElement('div');
-        taskEl.className = 'task-item' + (isCompleted ? ' completed' : '');
+        // Add priority class for color coding (1=low, 5=high)
+        const priorityClass = `priority-${task.priority || 3}`;
+        taskEl.className = 'task-item' + (isCompleted ? ' completed' : ` ${priorityClass}`);
         
         const taskContent = document.createElement('div');
         taskContent.className = 'task-content';

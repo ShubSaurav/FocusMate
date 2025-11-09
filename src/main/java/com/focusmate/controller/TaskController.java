@@ -32,10 +32,17 @@ public class TaskController {
     
     @GetMapping("/scheduled")
     public ResponseEntity<List<Task>> getScheduledTasks() throws Exception {
+        List<Task> allTasks;
         if (!dbAvailable()) {
-            return ResponseEntity.ok(com.focusmate.store.MemoryStore.TASKS.values().stream().toList());
+            allTasks = com.focusmate.store.MemoryStore.TASKS.values().stream().toList();
+        } else {
+            allTasks = scheduler.sorted();
         }
-        return ResponseEntity.ok(scheduler.sorted());
+        // Filter to only show PENDING tasks (exclude IN_PROGRESS and DONE)
+        List<Task> scheduled = allTasks.stream()
+            .filter(t -> "PENDING".equals(t.status))
+            .toList();
+        return ResponseEntity.ok(scheduled);
     }
     
     @GetMapping("/completed")
