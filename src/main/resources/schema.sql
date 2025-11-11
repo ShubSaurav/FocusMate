@@ -1,0 +1,22 @@
+-- Schema for FocusMate (manual DDL so Hibernate doesn't manage it)
+CREATE TABLE IF NOT EXISTS tasks (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  priority INT NOT NULL DEFAULT 0,
+  due_date DATE NULL,
+  target_minutes INT NOT NULL DEFAULT 0,
+  status VARCHAR(32) NOT NULL DEFAULT 'PENDING',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS sessions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  task_id INT NULL,
+  start_time TIMESTAMP NOT NULL,
+  end_time TIMESTAMP NOT NULL,
+  planned_minutes INT NOT NULL,
+  actual_minutes INT NOT NULL,
+  stopped_manually TINYINT(1) NOT NULL DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_sessions_task FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
