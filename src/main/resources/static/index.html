@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 FocusMate - Pomodoro Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="loginWrapper" class="auth-page">
+        <div class="auth-bg-animations" aria-hidden="true">
+            <span class="bg-dot dot-1"></span>
+            <span class="bg-dot dot-2"></span>
+            <span class="bg-dot dot-3"></span>
+            <div class="bg-icons">
+                <span class="bg-icon icon-1"><svg viewBox="0 0 24 24"><path d="M12 1a11 11 0 1 0 11 11A11.012 11.012 0 0 0 12 1zm1 11.59V7h-2v6.59l5.3 3.16 1-1.73z"/></svg></span>
+                <span class="bg-icon icon-2"><svg viewBox="0 0 24 24"><path d="M4 6h16M8 3v6M16 3v6M4 10h16v11H4z"/></svg></span>
+                <span class="bg-icon icon-3"><svg viewBox="0 0 24 24"><path d="M3 7h18v14H3zM7 1v6M17 1v6"/></svg></span>
+                <span class="bg-icon icon-4"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h12"/></svg></span>
+                <span class="bg-icon icon-5"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2zm-1 14l-4-4 1.4-1.4L11 13.2l5.6-5.6L18 9z"/></svg></span>
+                <span class="bg-icon icon-6"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5zm0 7l9 5-9 5-9-5 9-5z"/></svg></span>
+                <span class="bg-icon icon-7"><svg viewBox="0 0 24 24"><path d="M12 5l1.5 4.5H18l-3.8 2.8 1.4 4.3L12 14.5 8.4 16.6l1.4-4.3L6 9.5h4.5z"/></svg></span>
+                <span class="bg-icon icon-8"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5v3H5v12h14V10h-2V7a5 5 0 0 0-5-5z"/></svg></span>
+                <span class="bg-icon icon-9"><svg viewBox="0 0 24 24"><path d="M12 3a7 7 0 0 0-7 7v5H4v6h16v-6h-1v-5a7 7 0 0 0-7-7zm0 4a3 3 0 0 1 3 3v1H9v-1a3 3 0 0 1 3-3z"/></svg></span>
+                <span class="bg-icon icon-10"><svg viewBox="0 0 24 24"><path d="M5 12h14M5 6h14M5 18h14"/></svg></span>
+                <span class="bg-icon icon-11"><svg viewBox="0 0 24 24"><path d="M12 6l1.5 6h5L15 15 16.5 21 12 17.5 7.5 21 9 15 5.5 12h5z"/></svg></span>
+                <span class="bg-icon icon-12"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0 0 20 10 10 0 0 0 0-20zm0 2a8 8 0 0 1 0 16V4z"/></svg></span>
+                <span class="bg-icon icon-13"><svg viewBox="0 0 24 24"><path d="M12 2L7 22l5-4 5 4z"/></svg></span>
+                <span class="bg-icon icon-14"><svg viewBox="0 0 24 24"><path d="M12 3l8 8-8 8-8-8 8-8zm0 3v10"/></svg></span>
+                <span class="bg-icon icon-15"><svg viewBox="0 0 24 24"><path d="M4 17l4-4 4 4 8-8"/></svg></span>
+                <span class="bg-icon icon-16"><svg viewBox="0 0 24 24"><path d="M12 3c-1.1 0-2 .9-2 2v1h4V5c0-1.1-.9-2-2-2zm4 4H8v2h8V7zm-4 4c-1.1 0-2 .9-2 2v5h4v-5c0-1.1-.9-2-2-2z"/></svg></span>
+                <span class="bg-icon icon-17"><svg viewBox="0 0 24 24"><path d="M6 2h12a2 2 0 0 1 2 2v5H4V4a2 2 0 0 1 2-2zm0 9h12v11H6z"/></svg></span>
+                <span class="bg-icon icon-18"><svg viewBox="0 0 24 24"><path d="M5 12h14M5 18h14M9 6h6"/></svg></span>
+                <span class="bg-icon icon-19"><svg viewBox="0 0 24 24"><path d="M12 6l4 4H8zM4 17l4-4h8l4 4"/></svg></span>
+                <span class="bg-icon icon-20"><svg viewBox="0 0 24 24"><path d="M7 3h10a1 1 0 0 1 1 1v16l-6-4-6 4V4a1 1 0 0 1 1-1z"/></svg></span>
+                <span class="bg-icon icon-21"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9h18a9 9 0 0 0-9-9zm0 5a4 4 0 0 1 4 4h-8a4 4 0 0 1 4-4z"/></svg></span>
+                <span class="bg-icon icon-22"><svg viewBox="0 0 24 24"><path d="M4 11h16M4 16h10M4 6h6"/></svg></span>
+                <span class="bg-icon icon-23"><svg viewBox="0 0 24 24"><path d="M12 2l2 5 5 .5-4 3 1.5 5-4-2.5-4 2.5L9 10 5 7.5 10 7l2-5z"/></svg></span>
+                <span class="bg-icon icon-24"><svg viewBox="0 0 24 24"><path d="M3 7h18M7 3v4M17 3v4M5 10h14v11H5z"/></svg></span>
+            </div>
+        </div>
+        <div class="login-card card">
+            <h2>Welcome to FocusMate</h2>
+            <p>Login or create an account to keep your tasks and focus sessions private.</p>
+            <div id="authMessage" class="auth-message"></div>
+            <form id="authForm" onsubmit="submitAuth(event)">
+                <div class="form-field hidden" id="authNameField">
+                    <label for="authName">Name</label>
+                    <input type="text" id="authName" placeholder="Your full name" autocomplete="name" class="auth-input">
+                </div>
+                <div class="form-field">
+                    <label for="authEmail">Email</label>
+                    <input type="email" id="authEmail" placeholder="you@example.com" autocomplete="email" class="auth-input" required>
+                </div>
+                <div class="form-field">
+                    <label for="authPassword">Password</label>
+                    <input type="password" id="authPassword" placeholder="Enter password" autocomplete="current-password" class="auth-input" required>
+                </div>
+                <button id="authSubmitBtn" type="submit" class="btn-primary">Login</button>
+            </form>
+            <p class="auth-switch">New here? <a href="#" onclick="toggleRegister(event)">Create an account</a></p>
+        </div>
+    </div>
+
+    <div id="appWrapper" class="container hidden">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <h1 class="logo-text">FocusMate</h1>
+                <p>Smart Pomodoro & Task Manager</p>
+            </div>
+            <div class="header-right">
+                <span id="userEmail" class="user-pill">Not logged in</span>
+                <button class="btn-secondary" onclick="logout()">Logout</button>
+                <div class="time-display" id="currentTime"></div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Column - Timer -->
+            <div class="left-column">
+                <!-- Pomodoro Timer -->
+                <div class="pomodoro-section card">
+                    <h2>⏱️ Pomodoro Timer</h2>
+                    
+                    <div class="timer-display">
+                        <div class="timer-circle">
+                            <div class="timer-text" id="timerDisplay">25:00</div>
+                            <div class="timer-label">Focus Time</div>
+                        </div>
+                    </div>
+
+                    <div class="timer-controls">
+                        <div class="preset-buttons">
+                            <button class="preset-btn" onclick="setTimer(25)">25 min</button>
+                            <button class="preset-btn" onclick="setTimer(50)">50 min</button>
+                            <button class="preset-btn" onclick="setTimer(15)">15 min</button>
+                        </div>
+
+                        <div class="custom-timer">
+                            <input type="number" id="customMinutes" placeholder="Custom minutes" min="1" max="120" value="25">
+                            <button onclick="setCustomTimer()" class="btn-secondary">Set</button>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button id="startBtn" class="btn-primary" onclick="startTimer()">▶️ Start</button>
+                            <button id="pauseBtn" class="btn-warning" onclick="pauseTimer()" disabled>⏸️ Pause</button>
+                            <button id="stopBtn" class="btn-danger" onclick="stopTimer(true)" disabled>⏹️ Stop</button>
+                            <button id="doneBtn" class="btn-success" onclick="endTask()" disabled>✅ End Task</button>
+                        </div>
+                    </div>
+
+                    <div class="session-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Today's Sessions</span>
+                            <span class="stat-value" id="todaySessions">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Total Time</span>
+                            <span class="stat-value" id="totalTime">0h 0m</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle Column - Task Management -->
+            <div class="middle-column">
+                <!-- Add Task Form -->
+                <div class="add-task-section card">
+                    <h2>➕ Add New Task</h2>
+                    <form id="taskForm" onsubmit="addTask(event)">
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="taskTitle">Task Title</label>
+                                <input type="text" id="taskTitle" placeholder="e.g. Study algorithms chapter" required>
+                                <small class="help-text">Give a clear action phrase.</small>
+                            </div>
+                            <div class="form-field">
+                                <label>Priority</label>
+                                <div class="priority-input">
+                                    <div class="priority-group" id="priorityGroup">
+                                        <button type="button" class="priority-btn" data-value="1">1</button>
+                                        <button type="button" class="priority-btn" data-value="2">2</button>
+                                        <button type="button" class="priority-btn" data-value="3">3</button>
+                                        <button type="button" class="priority-btn" data-value="4">4</button>
+                                        <button type="button" class="priority-btn" data-value="5">5</button>
+                                    </div>
+                                </div>
+                                <!-- Hidden input used by JS/API -->
+                                <input type="hidden" id="taskPriority" value="3">
+                                <small class="help-text">Higher number = higher priority.</small>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="taskDueDate">Deadline Date</label>
+                                <input type="date" id="taskDueDate" class="date-input">
+                                <small class="help-text">When you aim to finish. Optional.</small>
+                            </div>
+                            <div class="form-field">
+                                <label for="taskTarget">Target Focus Minutes</label>
+                                <input type="number" id="taskTarget" placeholder="e.g. 45" min="15" value="60">
+                                <small class="help-text">Estimated focused work time for this task.</small>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">➕ Add Task</button>
+                    </form>
+                </div>
+
+                <!-- Task Grid: Scheduled + Active -->
+                <div class="task-grid">
+                    <!-- Scheduled Tasks -->
+                    <div class="tasks-section card scheduled-tasks-compact">
+                        <div class="section-header">
+                            <h2>📋 Scheduled Tasks</h2>
+                            <button onclick="refreshTasks()" class="btn-icon">🔄</button>
+                        </div>
+                        <div id="scheduledTasks" class="task-list-compact"></div>
+                    </div>
+
+                    <!-- Active Task Section -->
+                    <div class="active-task-section card">
+                        <h2>🎯 Active Task</h2>
+                        <div id="activeTaskContainer" class="active-task-container">
+                            <p class="empty-state">Click a scheduled task to start working on it</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics Section - Bottom -->
+        <div class="analytics-bottom">
+            <div class="analytics-section card">
+                <h2>📊 Analytics</h2>
+                
+                <div class="analytics-summary">
+                    <div class="summary-card">
+                        <div class="summary-icon">🎯</div>
+                        <div class="summary-content">
+                            <span class="summary-label">Completion Rate</span>
+                            <span class="summary-value" id="completionRate">0%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="summary-icon">⏰</div>
+                        <div class="summary-content">
+                            <span class="summary-label">Avg. Session</span>
+                            <span class="summary-value" id="avgSession">0 min</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="summary-icon">🔥</div>
+                        <div class="summary-content">
+                            <span class="summary-label">Streak</span>
+                            <span class="summary-value" id="streak">0 days</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity-calendar-section">
+                    <div class="calendar-header">
+                        <h3>📅 Activity Calendar</h3>
+                        <button class="btn-icon" onclick="previousMonth()">◀</button>
+                        <span id="calendarMonth"></span>
+                        <button class="btn-icon" onclick="nextMonth()">▶</button>
+                    </div>
+                    <div id="activityCalendar" class="activity-grid"></div>
+                    <div class="calendar-legend">
+                        <span class="legend-item"><span class="legend-box" style="background: #f0f0f0;"></span> No activity</span>
+                        <span class="legend-item"><span class="legend-box" style="background: #c6e48b;"></span> Low</span>
+                        <span class="legend-item"><span class="legend-box" style="background: #7bc96f;"></span> Medium</span>
+                        <span class="legend-item"><span class="legend-box" style="background: #239a3b;"></span> High</span>
+                        <span class="legend-item"><span class="legend-box" style="background: #2196F3;"></span> Very High</span>
+                    </div>
+                </div>
+
+                <div class="completed-tasks-section">
+                    <div class="section-header">
+                        <h3>✅ Completed Tasks</h3>
+                        <span id="completedCount" class="badge">0</span>
+                    </div>
+                    <div id="completedTasks" class="task-list"></div>
+                </div>
+
+                <div class="productivity-tips">
+                    <h3>💡 Today's Tip</h3>
+                    <p id="dailyTip">Take a 5-minute break every 25 minutes to stay focused and refreshed!</p>
+                </div>
+
+                <div class="developer-footer">
+                    <div class="footer-brand">
+                        <div class="brand-mark">👋</div>
+                        <div>
+                            <p class="footer-title">Built by <strong>Shubham Saurav</strong></p>
+                            <p class="footer-subtitle">Growth-focused productivity tools with clean UI and realtime task flow.</p>
+                        </div>
+                    </div>
+                    <div class="footer-contacts">
+                        <a href="mailto:shubhamsaurav2264@gmail.com" class="footer-contact-item">
+                            <span>✉️</span>
+                            <span>shubhamsaurav2264@gmail.com</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/shubsaurav/" target="_blank" rel="noopener" class="footer-contact-item">
+                            <span>🔗</span>
+                            <span>/in/shubsaurav</span>
+                        </a>
+                    </div>
+                    <a href="https://www.linkedin.com/in/shubsaurav/" target="_blank" rel="noopener" class="link-button">Connect</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
