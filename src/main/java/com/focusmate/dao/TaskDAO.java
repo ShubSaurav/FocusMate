@@ -63,6 +63,17 @@ public class TaskDAO {
         return list;
     }
 
+    public List<Task> listAll() throws Exception {
+        List<Task> list = new ArrayList<>();
+        try (Connection c = DB.get();
+             PreparedStatement ps = c.prepareStatement("SELECT * FROM tasks ORDER BY created_at DESC");
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) list.add(map(rs));
+        }
+        return list;
+    }
+
+
     public Task findById(int id, int userId) throws Exception {
         try (Connection c = DB.get();
              PreparedStatement ps = c.prepareStatement("SELECT * FROM tasks WHERE id = ? AND user_id = ?")) {

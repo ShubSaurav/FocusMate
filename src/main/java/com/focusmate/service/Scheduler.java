@@ -40,6 +40,30 @@ public class Scheduler {
         return sortedTasks;
     }
 
+    public List<Task> sorted() throws Exception {
+        List<Task> tasks = dao.listAll();
+        LocalDate today = LocalDate.now();
+        List<Scored> scoredList = new ArrayList<>();
+
+        for (Task t : tasks) {
+            int actual = dao.getActualMinutes(t.id, t.userId != null ? t.userId : 0);
+            int gap = Math.max(0, t.targetMinutes - actual);
+            double urgency = 0.0;
+            if (t.dueDate != null) {
+                long days = Math.max(1, ChronoUnit.DAYS.between(today, t.dueDate));
+                urgency = 1.0 / days;
+            }
+            double score = w1 * t.priority + w2 * urgency + w3 * (gap / 60.0);
+            scoredList.add(new Scored(t, score));
+        }
+
+        scoredList.sort((a, b) -> Double.compare(b.score, a.score));
+
+        List<Task> sortedTasks = new ArrayList<>();
+        for (Scored s : scoredList) sortedTasks.add(s.task);
+        return sortedTasks;
+    }
+
     private static class Scored {
         Task task;
         double score;
